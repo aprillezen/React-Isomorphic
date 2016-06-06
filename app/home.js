@@ -19,10 +19,13 @@ class home extends React.Component{
 
 	}
 	render(){
-		var users = this.state.data;
+		var users = this.state.data.map(function(item){
+			return (<div> {item.fullname} </div>)
+		})
+
 		return(
 			<div>
-				<h1> Home </h1>
+				<h1> Users <br/> {users} </h1>
 
 
 			</div>
