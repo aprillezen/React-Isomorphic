@@ -15,8 +15,8 @@ class appnav extends React.Component{
 				    </Navbar.Header>
 				    <Navbar.Collapse>
 				      <Nav>
-				        <LinkContainer to="/home"> 
-				              <NavItem eventKey={1}>Home</NavItem>
+				        <LinkContainer to="/dashboard"> 
+				              <NavItem eventKey={1}>Dashboard</NavItem>
 				        </LinkContainer>
 				        <LinkContainer to="/student"> 
 				              <NavItem eventKey={2}>Students</NavItem>

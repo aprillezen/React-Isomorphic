@@ -1,7 +1,7 @@
 import React from 'react'
 import ajax from 'superagent'
 
-class home extends React.Component{
+class dashboard extends React.Component{
 	constructor(){
 		super()
 		this.state = { data: [] }
@@ -20,12 +20,12 @@ class home extends React.Component{
 	}
 	render(){
 		var users = this.state.data.map(function(item){
-			return (<div> {item.fullname} </div>)
+			return (<div key={item.id}> {item.fullname} </div>)
 		})
 
 		return(
 			<div>
-				<h1> Users <br/> {users} </h1>
+				{users} 
 
 
 			</div>
@@ -35,4 +35,4 @@ class home extends React.Component{
 
 }
 
-export default home
+export default dashboard
