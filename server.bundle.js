@@ -66,11 +66,11 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _api = __webpack_require__(15);
+	var _api = __webpack_require__(16);
 
 	var _api2 = _interopRequireDefault(_api);
 
-	var _path = __webpack_require__(16);
+	var _path = __webpack_require__(17);
 
 	var _path2 = _interopRequireDefault(_path);
 
@@ -510,6 +510,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _lodash = __webpack_require__(15);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
 	var _reactBootstrap = __webpack_require__(8);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -526,24 +530,67 @@
 		function appLogin() {
 			_classCallCheck(this, appLogin);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(appLogin).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(appLogin).call(this));
+
+			_this.state = {
+				username: '',
+				hasError: false,
+				errorMsg: ''
+			};
+
+			return _this;
 		}
 
 		_createClass(appLogin, [{
+			key: 'onSubmit',
+			value: function onSubmit(e) {
+				e.preventDefault();
+				if (_lodash2.default.isEmpty(this.state.username)) {
+					this.setState({ errorMsg: 'Empty username' });
+					this.setState({ hasError: true });
+					return;
+				}
+
+				this.setState({ hasError: false });
+			}
+		}, {
+			key: 'onChange',
+			value: function onChange(e) {
+				this.setState({ username: e.target.value });
+			}
+		}, {
+			key: 'closeAlert',
+			value: function closeAlert() {
+				this.setState({ hasError: false });
+			}
+		}, {
 			key: 'render',
 			value: function render() {
+				var Err = _react2.default.createElement('div', null);
+				if (this.state.hasError) {
+					Err = _react2.default.createElement(
+						_reactBootstrap.Alert,
+						{ bsStyle: 'danger', onDismiss: this.closeAlert.bind(this) },
+						_react2.default.createElement(
+							'p',
+							null,
+							this.state.errorMsg
+						)
+					);
+				}
+
 				return _react2.default.createElement(
 					'div',
 					{ className: 'container' },
 					_react2.default.createElement(
 						'div',
 						{ className: 'card card-container' },
-						_react2.default.createElement('img', { id: 'logo-img', className: 'logo-img', src: 'https://placeholdit.imgix.net/~text?txtsize=24&txt=150x150&w=150&h=150' }),
+						Err,
 						_react2.default.createElement(
 							'form',
-							{ className: 'form-signin' },
-							_react2.default.createElement('input', { type: 'email', id: 'inputEmail', className: 'form-control', placeholder: 'email', required: true, autofocus: true }),
-							_react2.default.createElement('input', { type: 'password', id: 'inputPassword', className: 'form-control', placeholder: 'password', required: true }),
+							{ className: 'form-signin', onSubmit: this.onSubmit.bind(this) },
+							_react2.default.createElement('input', { type: 'text', id: 'txtuser', className: 'form-control', placeholder: 'User Name', autofocus: true, onChange: this.onChange.bind(this), value: this.state.username }),
+							_react2.default.createElement('input', { type: 'password', id: 'inputPassword', className: 'form-control', placeholder: 'password' }),
 							_react2.default.createElement(
 								'button',
 								{ className: 'btn btn-lg btn-primary btn-block btn-signin', type: 'submit' },
@@ -586,6 +633,12 @@
 
 /***/ },
 /* 15 */
+/***/ function(module, exports) {
+
+	module.exports = require("lodash");
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';
@@ -594,11 +647,11 @@
 
 	var _express2 = _interopRequireDefault(_express);
 
-	var _path = __webpack_require__(16);
+	var _path = __webpack_require__(17);
 
 	var _path2 = _interopRequireDefault(_path);
 
-	var _fs = __webpack_require__(17);
+	var _fs = __webpack_require__(18);
 
 	var _fs2 = _interopRequireDefault(_fs);
 
@@ -622,13 +675,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, ""))
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports = require("path");
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports = require("fs");
